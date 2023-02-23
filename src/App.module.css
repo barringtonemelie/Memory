@@ -1,0 +1,31 @@
+.wrapper {
+    width: 100vw; 
+    height: 100vh; 
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.button {
+    min-width: 6rem; 
+    min-height: 2rem; 
+    padding: 1rem; 
+    background-color: darkcyan;
+    color: blanchedalmond;
+    border: none; 
+    border-radius: 5px;
+    font-size: 4rem;
+    grid-row: 1;
+    grid-column: 3 / span 2;
+    transition: 0.2s; 
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: rgb(4, 110, 110);
+    transform: scale(1.05);
+}
+
+.button:active {
+    background-color: rgb(4, 65, 65);
+}
