@@ -4,9 +4,9 @@ import styles from './App.module.css';
 
 function Card(props) {
   return (
-      <div id={props.id}>
+      <div>
         <img src={props.src} alt="A memory card" className={props.flipped ? styles.cardImg : styles.imgHidden} onClick={props.handleCardChoice}/>
-        <div className={props.flipped ? styles.imgHidden : styles.cardFront} onClick={() => props.handleCardChoice(props.id)}></div>
+        <div id={props.id} className={props.flipped ? styles.imgHidden : styles.cardFront} onClick={props.handleCardChoice}></div>
       </div>  
     )
 }
@@ -26,11 +26,19 @@ function App() {
 
   React.useEffect(() => {
     console.log("UseEffect triggades");
+
+    if (cardOne === cardTwo) {
+      console.log("You picked two identical cards!");
+      
+    }
+
+    console.log("Card one ", cardOne); 
+    console.log("Card two ", cardTwo); 
   }, [cardOne, cardTwo]); 
 
 
-  const handleCardChoice = (id) => {
-    console.log(id);  
+  const handleCardChoice = (event) => {
+    const id = parseFloat(event.target.id); 
     
     cardOne ? setCardTwo(id) : setCardOne(id); 
   }
@@ -39,10 +47,10 @@ function App() {
     const doubled = [...images, ...images]; 
     const shuffled = doubled.sort(() => Math.random() - 0.5);
     const memoryCards = shuffled.map(card => {
-      return {...card, id: Math.random()}; 
+      return {...card, id: Math.random(), matched: false}; 
     });
     setCards(memoryCards);
-    console.log("initiateCardsArray ran, cards: ", cards); 
+    // console.log("initiateCardsArray ran, cards: ", cards); 
   }
 
 
@@ -50,7 +58,6 @@ function App() {
     <div className="App">
       <div className={styles.wrapper}>
         <button className={styles.button} onClick={initiateCardsArray}>New Game</button>
-        {console.log(cards)}
         <div className={styles.cardsWrapper}>
           {cards.map(card => {
             return(
@@ -65,8 +72,8 @@ function App() {
           })}
         </div>
       </div>
-      {console.log("Card one: ", cardOne)} 
-      {console.log("Card two: ", cardTwo)}
+      {/* {console.log("Card one: ", cardOne)} 
+      {console.log("Card two: ", cardTwo)} */}
     </div>
     
   )
